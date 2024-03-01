@@ -7,18 +7,20 @@ CMD java -jar /JrebelBrains.jar -p $PORT
 
 EXPOSE 8081
 
-# docker build -t jrebel-image .
-# docker run -dp 0.0.0.0:11111:8081 --name jrebel-ser jrebel-image
+
+# docker network create --subnet 172.20.10.0/24 private-network
+# docker run --network private-network -dp 0.0.0.0:1002:8081 --name jrebel-ser jrebel:latest
 
 # docker inspect jrebel-ser
-
-
-
 # docker network create skyx-network
-#  docker run --network skyx-network -dp 172.16.50.241:11111:8081 --name jrebel-ser jrebel-image
-
 # docker network create --subnet 172.16.50.242/24 --gateway 172.16.50.1 --driver bridge skyx-network
-
 # docker network prune --force --filter until=5m
 
-# VOLUME /public docker run -v /home/user/public:/public nginx
+# VOLUME /public docker run -v /home/user/public:/public nginxN
+
+# docker build --no-cache -t jrebel .
+# docker tag jrebel winfast/jrebel:latest
+# docker push winfast/jrebel:latest
+# docker run -dp 0.0.0.0:1002:8081 --name jrebel-ser jrebel:latest
+
+
